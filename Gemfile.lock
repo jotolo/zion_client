@@ -6,6 +6,7 @@ GEM
       multi_xml (>= 0.5.2)
     multi_xml (0.6.0)
     rubyzip (1.2.1)
+    zipruby (0.3.6)
 
 PLATFORMS
   ruby
@@ -14,6 +15,7 @@ DEPENDENCIES
   byebug
   httparty
   rubyzip
+  zipruby
 
 RUBY VERSION
    ruby 2.4.0p0
