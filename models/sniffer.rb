@@ -2,9 +2,10 @@ require './api_consumer'
 require './zip_manager'
 require './route'
 class Sniffer
-
+  attr_accessor :all
   def initialize(passphrase)
     @passphrase = passphrase
+    @all = []
   end
 
   def import
@@ -24,6 +25,9 @@ class Sniffer
   private
 
   def convert_from_source(data)
+
+
+
 
   end
 end
