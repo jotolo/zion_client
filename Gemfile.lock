@@ -1,0 +1,36 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    activesupport (5.1.4)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (~> 0.7)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+    byebug (9.1.0)
+    concurrent-ruby (1.0.5)
+    httparty (0.15.6)
+      multi_xml (>= 0.5.2)
+    i18n (0.8.6)
+    minitest (5.10.3)
+    multi_xml (0.6.0)
+    rubyzip (1.2.1)
+    thread_safe (0.3.6)
+    tzinfo (1.2.3)
+      thread_safe (~> 0.1)
+    zipruby (0.3.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activesupport
+  byebug
+  httparty
+  rubyzip
+  zipruby
+
+RUBY VERSION
+   ruby 2.4.0p0
+
+BUNDLED WITH
+   1.16.0.pre.2
