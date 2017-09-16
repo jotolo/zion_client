@@ -27,6 +27,7 @@ class SnifferManager
   def export
     self.all.each do |route|
       ac = ApiConsumer::ResourceCreator.new(@passphrase, @source, route.start_node, route.end_node, route.start_time, route.end_time)
+      puts route.inspect
       response = ac.create_route
       if response.code == 200
         puts 'Successful creation'
