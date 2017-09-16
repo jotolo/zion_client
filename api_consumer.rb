@@ -2,7 +2,7 @@ require 'rubygems'
 require 'httparty'
 
 module  ApiConsumer
-  class Route
+  class Resource
     include HTTParty
     base_uri 'https://challenge.distribusion.com/the_one'
 
@@ -10,12 +10,12 @@ module  ApiConsumer
       @options = { query: { passphrase: passphrase, source: source } }
     end
 
-    def get_route
+    def get_resource
       self.class.get('/routes', @options)
     end
   end
 
-  class RouteCreator
+  class ResourceCreator
     include HTTParty
     base_uri 'https://challenge.distribusion.com/the_one'
 
