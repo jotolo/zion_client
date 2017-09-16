@@ -26,7 +26,6 @@ class ZipManager
   def self.decompress_zip_memory(buffer)
     result = {}
     Zip::Archive.open_buffer(buffer) do |archive|
-      byebug
       archive.each do |zip_file|
         # directory or hidden files
         if zip_file.directory? || zip_file.name.split('/').last.start_with?('.')

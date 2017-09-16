@@ -3,7 +3,7 @@ require './zip_manager'
 require './route'
 require 'date'
 require 'byebug'
-class Loophole
+class LoopholeManager
   attr_accessor :all
   def initialize(passphrase)
     @passphrase = passphrase
@@ -21,6 +21,19 @@ class Loophole
     else
       []
     end
+  end
+
+  def export
+    self.all.each do |route|
+      ac = ApiConsumer::ResourceCreator.new(@passphrase, @source, route.start_node, route.end_node, route.start_time, route.end_time)
+      response = ac.create_route
+      if response.code == 200
+        puts 'Successful creation'
+      else
+        puts 'Error in creation'
+      end
+    end
+    self.all
   end
 
   private

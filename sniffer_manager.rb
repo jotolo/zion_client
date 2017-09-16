@@ -4,7 +4,7 @@ require './route'
 require 'active_support/time'
 require 'active_support/duration'
 
-class Sniffer
+class SnifferManager
   attr_accessor :all
   def initialize(passphrase)
     @passphrase = passphrase
@@ -20,7 +20,19 @@ class Sniffer
       data = ZipManager.decompress_zip_memory(response.body)
       convert_from_source(data)
     else
-      return nil
+      []
+    end
+  end
+
+  def export
+    self.all.each do |route|
+      ac = ApiConsumer::ResourceCreator.new(@passphrase, @source, route.start_node, route.end_node, route.start_time, route.end_time)
+      response = ac.create_route
+      if response.code == 200
+        puts 'Successful creation'
+      else
+        puts 'Error in creation'
+      end
     end
   end
 
@@ -43,5 +55,6 @@ class Sniffer
       end_time = node_time_element ? start_time + (node_time_element['duration_in_milliseconds'].to_i / 1000).seconds : nil
       self.all << Route.new(@passphrase, @source, start_node, end_node, start_time, end_time)
     end
+    self.all
   end
 end

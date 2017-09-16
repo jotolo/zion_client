@@ -1,7 +1,7 @@
 require './api_consumer'
 require './zip_manager'
 require './route'
-class Sentinel
+class SentinelManager
   attr_accessor :all
   def initialize(passphrase)
     @passphrase = passphrase
@@ -18,12 +18,22 @@ class Sentinel
       result = convert_from_source(data)
       result
     else
-      return nil
+      []
     end
   end
 
   def export
-    #exporter = ApiConsumer::ResourceCreator.new()
+    self.all.each do |route|
+      ac = ApiConsumer::ResourceCreator.new(@passphrase, @source, route.start_node, route.end_node, route.start_time, route.end_time)
+      response = ac.create_route
+      if response.code == 200
+        puts 'Successful creation'
+      elsif response.code == 503
+          puts 'Service Unavailable. Try again in a while'
+      else
+        puts 'Error in creation'
+      end
+    end
   end
 
   private
@@ -33,8 +43,9 @@ class Sentinel
 
     routes.each do |route_element|
       start_node = route_element ? route_element['node'] : nil
-      start_time = route_element ? DateTime.iso8601(route_element['time']) : nil
+      start_time = route_element ? DateTime.iso8601(route_element['time']).utc : nil
       self.all << Route.new(@passphrase, @source, start_node, nil, start_time, nil)
     end
+    self.all
   end
 end
