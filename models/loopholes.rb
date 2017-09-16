@@ -1,5 +1,5 @@
-require './api_consumer'
-require './zip_manager'
+require '../api_consumer'
+require '../zip_manager'
 require './route'
 class Loophole
 
