@@ -33,8 +33,8 @@ class Loophole
       node_object = node_pairs.select{|np| np['id'].to_i == route_element['node_pair_id'].to_i}.first
       start_node = node_object ? node_object['start_node'] : nil
       end_node = node_object ? node_object['end_node'] : nil
-      start_time = route_element['start_time']
-      end_time = route_element['end_time']
+      start_time = DateTime.iso8601(route_element['start_time'])
+      end_time = DateTime.iso8601(route_element['end_time'])
       self.all << Route.new(@passphrase, @source, start_node, end_node, start_time, end_time)
     end
   end
