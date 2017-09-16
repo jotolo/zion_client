@@ -33,7 +33,7 @@ class ZipManager
           if zip_file.name.end_with?('csv')
             key_name = zip_file.name.split('/').last.split('.').first
             result[key_name] = []
-            CSV.foreach(zip_file.name,headers: :first_row) do |row|
+            CSV.foreach(zip_file.name,:headers => :first_row) do |row|
               result[key_name] << row.to_h
             end
           else
