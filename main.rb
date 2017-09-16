@@ -3,6 +3,7 @@ require './sniffer_manager'
 require './sentinel_manager'
 
 passphrase = 'Kans4s-i$-g01ng-by3-bye'
+
 sentinel_manager = SentinelManager.new(passphrase)
 puts 'IMPORTING SENTINELS...'
 sentinel_manager.import
