@@ -5,7 +5,7 @@ require './zip_manager'
 
 sources = ['sentinels', 'sniffers', 'loopholes']
 
-consumer = ApiConsumer::Resource.new('Kans4s-i$-g01ng-by3-bye', sources[2])
+consumer = ApiConsumer::Resource.new('Kans4s-i$-g01ng-by3-bye', sources[0])
 
 response = consumer.get_resource
 

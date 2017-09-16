@@ -26,8 +26,10 @@ class ZipManager
   def self.decompress_zip_memory(buffer)
     result = {}
     Zip::Archive.open_buffer(buffer) do |archive|
+      byebug
       archive.each do |zip_file|
-        if zip_file.directory?
+        # directory or hidden files
+        if zip_file.directory? || zip_file.name.split('/').last.start_with?('.')
           next
         else
           if zip_file.name.end_with?('csv')
@@ -36,7 +38,7 @@ class ZipManager
             CSV.foreach(zip_file.name,:headers => :first_row) do |row|
               result[key_name] << row.to_h
             end
-          else
+          elsif zip_file.name.end_with?('json')
             result.merge!(JSON.parse(zip_file.read))
           end
         end
